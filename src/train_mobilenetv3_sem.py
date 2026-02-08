@@ -133,7 +133,7 @@ for epoch in range(EPOCHS):
     if val_acc > best_val_acc:
         best_val_acc = val_acc
         torch.save(model.state_dict(), os.path.join(MODEL_DIR, "mobilenetv3_sem_best.pth"))
-        print("✅ Best model saved")
+        print("Best model saved")
 
 print("\nTraining complete.")
 print("Best validation accuracy:", best_val_acc)
