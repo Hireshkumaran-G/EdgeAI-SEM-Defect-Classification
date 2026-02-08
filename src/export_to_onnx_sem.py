@@ -30,7 +30,6 @@ model.classifier[3] = nn.Linear(
 
 model.load_state_dict(torch.load(MODEL_PATH, map_location=DEVICE))
 
-# 🔥🔥🔥 THIS LINE IS THE FIX 🔥🔥🔥
 model.eval()
 
 model.to(DEVICE)
@@ -51,5 +50,5 @@ torch.onnx.export(
     opset_version=13
 )
 
-print("✅ ONNX model exported correctly (EVAL MODE)")
+print("ONNX model exported correctly (EVAL MODE)")
 print("Saved at:", ONNX_PATH)
