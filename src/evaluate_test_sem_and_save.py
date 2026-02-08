@@ -9,15 +9,22 @@ from sklearn.metrics import classification_report, confusion_matrix
 import seaborn as sns
 
 # ================= CONFIG =================
-DATA_DIR = "dataset"
-MODEL_PATH = "models/mobilenetv3_sem_best.pth"
+SRC_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(SRC_DIR)
+DATA_DIR = os.path.join(PROJECT_ROOT, "dataset")
+# NOTE:
+# Dataset is expected at <project_root>/dataset and is not included in GitHub.
+MODEL_DIR = os.path.join(PROJECT_ROOT, "models")
+os.makedirs(MODEL_DIR, exist_ok=True)
+
+
 IMG_SIZE = 128
 BATCH_SIZE = 16
 NUM_CLASSES = 10
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 # ================= OUTPUT DIR =================
-OUTPUT_DIR = os.path.join("outputs")
+OUTPUT_DIR = os.path.join(PROJECT_ROOT, "outputs")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 print("Results will be saved to:", OUTPUT_DIR)
@@ -40,7 +47,7 @@ print("Test images:", len(test_ds))
 # ================= MODEL =================
 model = models.mobilenet_v3_small(weights=None)
 model.classifier[3] = nn.Linear(model.classifier[3].in_features, NUM_CLASSES)
-model.load_state_dict(torch.load(MODEL_PATH, map_location=DEVICE, weights_only=True))
+model.load_state_dict(torch.load(os.path.join(MODEL_DIR, "mobilenetv3_sem_best.pth"), map_location=DEVICE, weights_only=True))
 model = model.to(DEVICE)
 model.eval()
 

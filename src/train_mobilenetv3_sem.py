@@ -6,8 +6,12 @@ from torch.utils.data import DataLoader
 from torch.optim.lr_scheduler import CosineAnnealingLR
 
 # ===================== BASIC SETUP =====================
-DATA_DIR = "dataset"
-MODEL_DIR = "models"
+SRC_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(SRC_DIR)
+DATA_DIR = os.path.join(PROJECT_ROOT, "dataset")
+# NOTE:
+# Dataset is expected at <project_root>/dataset and is not included in GitHub.
+MODEL_DIR = os.path.join(PROJECT_ROOT, "models")
 os.makedirs(MODEL_DIR, exist_ok=True)
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
@@ -128,10 +132,7 @@ for epoch in range(EPOCHS):
     # ---- SAVE BEST MODEL ----
     if val_acc > best_val_acc:
         best_val_acc = val_acc
-        torch.save(
-            model.state_dict(),
-            os.path.join(MODEL_DIR, "mobilenetv3_sem_best.pth")
-        )
+        torch.save(model.state_dict(), os.path.join(MODEL_DIR, "mobilenetv3_sem_best.pth"))
         print("✅ Best model saved")
 
 print("\nTraining complete.")

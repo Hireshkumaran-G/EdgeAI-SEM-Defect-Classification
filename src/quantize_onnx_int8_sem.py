@@ -8,10 +8,18 @@ from onnxruntime.quantization import (
 )
 
 # ================= CONFIG =================
-ONNX_FP32_PATH = os.path.join("outputs", "mobilenetv3_sem.onnx")
-ONNX_INT8_PATH = os.path.join("outputs", "mobilenetv3_sem_int8.onnx")
+SRC_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(SRC_DIR)
+DATA_DIR = os.path.join(PROJECT_ROOT, "dataset")
+# NOTE:
+# Dataset is expected at <project_root>/dataset and is not included in GitHub.
+MODEL_DIR = os.path.join(PROJECT_ROOT, "models")
+os.makedirs(MODEL_DIR, exist_ok=True)
 
-CALIB_DIR = os.path.join("dataset", "train")
+ONNX_FP32_PATH = os.path.join(MODEL_DIR, "mobilenetv3_sem.onnx")
+ONNX_INT8_PATH = os.path.join(MODEL_DIR, "mobilenetv3_sem_int8.onnx")
+CALIB_DIR = os.path.join(DATA_DIR, "train")
+
 IMG_SIZE = 128
 NUM_CALIB_IMAGES = 200
 
