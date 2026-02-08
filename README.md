@@ -56,7 +56,7 @@ Note: The full dataset is not included in this repository due to size constraint
 Metric              | FP32     | INT8
 --------------------|----------|--------
 Model size          | 5.84 MB  | 1.67 MB (≈3.5× smaller)
-Test Accuracy       | 95.15%   | Not evaluated (edge-optimized)
+Test Accuracy       | 96.67%   | Not evaluated (edge-optimized)
 
 - Balanced performance across all defect categories.
 - Confusion matrix and output samples are available in outputs_sample/.
