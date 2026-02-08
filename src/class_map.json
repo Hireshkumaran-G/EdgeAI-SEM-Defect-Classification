@@ -1,0 +1,12 @@
+{
+  "clean": 0,
+  "bridge": 1,
+  "cmp": 2,
+  "crack": 3,
+  "ler": 4,
+  "open": 5,
+  "particle": 6,
+  "scratch": 7,
+  "vias": 8,
+  "other": 9
+}

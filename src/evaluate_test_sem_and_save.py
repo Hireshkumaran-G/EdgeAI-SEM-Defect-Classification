@@ -19,7 +19,7 @@ os.makedirs(MODEL_DIR, exist_ok=True)
 
 
 IMG_SIZE = 128
-BATCH_SIZE = 16
+BATCH_SIZE = 24
 NUM_CLASSES = 10
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -47,7 +47,7 @@ print("Test images:", len(test_ds))
 # ================= MODEL =================
 model = models.mobilenet_v3_small(weights=None)
 model.classifier[3] = nn.Linear(model.classifier[3].in_features, NUM_CLASSES)
-model.load_state_dict(torch.load(os.path.join(MODEL_DIR, "mobilenetv3_sem_best.pth"), map_location=DEVICE, weights_only=True))
+model.load_state_dict(torch.load(os.path.join(MODEL_DIR, "mobilenetv3_sem_best.pth"), map_location=DEVICE))
 model = model.to(DEVICE)
 model.eval()
 

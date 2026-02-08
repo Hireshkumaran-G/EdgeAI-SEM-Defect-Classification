@@ -20,9 +20,9 @@ print("Using device:", DEVICE)
 # ===================== CONFIG =====================
 NUM_CLASSES = 10
 IMG_SIZE = 128
-BATCH_SIZE = 16
-EPOCHS = 35
-LR = 5e-4
+BATCH_SIZE = 24
+EPOCHS = 45
+LR = 3e-4
 FREEZE_EPOCHS = 3
 
 # ===================== TRANSFORMS =====================
@@ -31,7 +31,7 @@ train_tf = transforms.Compose([
     transforms.Resize((IMG_SIZE, IMG_SIZE)),
     transforms.RandomHorizontalFlip(),
     transforms.RandomVerticalFlip(),
-    transforms.RandomRotation(90),
+    transforms.RandomRotation(10),
     transforms.ToTensor(),
 ])
 
