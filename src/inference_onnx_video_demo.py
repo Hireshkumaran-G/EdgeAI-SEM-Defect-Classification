@@ -67,8 +67,6 @@ if len(image_paths) == 0:
 
 # ===================== PREPARE VIDEO WRITER =====================
 first_img = cv2.imread(image_paths[0])
-
-# 🔥 resize FIRST, then create writer (fixes FFmpeg warnings)
 first_img = cv2.resize(
     first_img,
     None,
@@ -126,4 +124,4 @@ for img_path in image_paths:
 
 out.release()
 
-print(f"✅ Inference demo video saved at:\n{OUTPUT_VIDEO_PATH}")
+print(f"Inference demo video saved at:\n{OUTPUT_VIDEO_PATH}")
