@@ -1,4 +1,3 @@
-outputs_sample/ 
 *.mp4 
 __pycache__/ 
 dataset/   # Full data
