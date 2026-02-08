@@ -57,7 +57,7 @@ class SEMCalibrationDataReader(CalibrationDataReader):
         return {"input": img}
 
 # ================= QUANTIZATION =================
-print("🔧 Starting INT8 quantization...")
+print("Starting INT8 quantization...")
 print("Calibrating using real SEM images...")
 
 calib_reader = SEMCalibrationDataReader(CALIB_DIR)
@@ -70,14 +70,14 @@ quantize_static(
     weight_type=QuantType.QInt8
 )
 
-print("✅ INT8 quantization completed")
+print("INT8 quantization completed")
 print("INT8 model saved at:", ONNX_INT8_PATH)
 
 # ================= SIZE COMPARISON =================
 fp32_size = os.path.getsize(ONNX_FP32_PATH) / (1024 * 1024)
 int8_size = os.path.getsize(ONNX_INT8_PATH) / (1024 * 1024)
 
-print("\n📦 Model size comparison:")
+print("\nModel size comparison:")
 print(f"FP32 : {fp32_size:.2f} MB")
 print(f"INT8 : {int8_size:.2f} MB")
 print(f"Compression ratio: {fp32_size / int8_size:.1f}×")
