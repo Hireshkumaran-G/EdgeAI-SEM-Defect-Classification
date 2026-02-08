@@ -92,7 +92,7 @@ np.savetxt(
     fmt="%d"
 )
 
-print(f"\n✅ TEST ACCURACY: {test_acc:.4f}")
+print(f"\nTEST ACCURACY: {test_acc:.4f}")
 print("Reports saved.")
 
 # ================= CONFUSION MATRIX PLOT =================
@@ -123,4 +123,4 @@ plt.savefig(
 )
 plt.close()
 
-print("📊 Confusion matrix plot saved.")
+print("Confusion matrix plot saved.")
