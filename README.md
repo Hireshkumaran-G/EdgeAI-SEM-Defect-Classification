@@ -8,15 +8,15 @@ This project automates the process using a lightweight convolutional neural netw
 
 ## Defect Classes
 - clean
-- bridge
-- cmp
-- crack
-- ler
-- open
+- defect bridge
+- defect cmp
+- defect crack
+- defect ler
+- defect open
+- defect particle
+- defect scratch
+- defect vias
 - other
-- particle
-- scratch
-- vias
 
 ## Dataset Structure
 ```text
@@ -56,10 +56,16 @@ Note: The full dataset is not included in this repository due to size constraint
 Metric              | FP32     | INT8
 --------------------|----------|--------
 Model size          | 5.84 MB  | 1.67 MB (≈3.5× smaller)
-Test Accuracy       | 96.67%   | Not evaluated (edge-optimized)
+Test Accuracy       | 96.37%   | Hardware-dependent (NXP eIQ)
+
 
 - Balanced performance across all defect categories.
 - Confusion matrix and output samples are available in outputs_sample/.
+
+## Inference Demo
+A headless ONNX-based inference demo (image slideshow / video) is provided to demonstrate
+end-to-end SEM defect classification suitable for edge deployment.
+
 
 ## Deployment Compatibility
 - Export format: ONNX
@@ -70,7 +76,7 @@ Test Accuracy       | 96.67%   | Not evaluated (edge-optimized)
 ## Hardware & Platform
 Stage        | Framework    | Hardware
 -------------|--------------|------------
-Training     | PyTorch      | GPU
+Training     | PyTorch      | GPU (rtx 3050 4gb vram)
 Inference    | ONNX Runtime | CPU / Edge device
 
 ## Disclaimer
