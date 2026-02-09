@@ -21,9 +21,9 @@ This project automates the process using a lightweight convolutional neural netw
 ## Dataset Structure
 ```text
     dataset/
-    ├── train/
-    ├── val/
-    └── test/
+    ├── train/    (each defect class 150 images)
+    ├── val/      (each defect class 32 images)
+    └── test/     (each defect class 33 images)
 ```
 
 Each split contains class-wise subfolders representing the defect categories.
@@ -66,7 +66,6 @@ Test Accuracy       | 96.37%   | Hardware-dependent (NXP eIQ)
 A headless ONNX-based inference demo (image slideshow / video) is provided to demonstrate
 end-to-end SEM defect classification suitable for edge deployment.
 
-
 ## Deployment Compatibility
 - Export format: ONNX
 - Optimization: INT8 quantized
@@ -84,16 +83,3 @@ The INT8 accuracy may vary depending on the target hardware and runtime calibrat
 Validation should be performed on the deployed NXP device using the eIQ runtime environment.
 
 ---
-
-# dataset_sample/README.md
-
-# Dataset Sample
-
-The full SEM dataset is not included in this repository.
-
-The dataset follows the structure:
-- Train (70%)
-- Validation (15%)
-- Test (15%)
-
-Each split contains class-wise folders for all defect categories.
