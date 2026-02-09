@@ -6,9 +6,9 @@ and hackathon submission guidelines.
 Dataset structure used in this project:
 ```text
 dataset/
-├── train/      (150)
-├── val/        (32)
-└── test/       (33)
+├── train/      (each defect class 150 images)
+├── val/        (each defect class 32 images)
+└── test/       (each defect class 33 images)
 ```
 Each split contains class-wise subfolders for all defect categories:
 - clean
