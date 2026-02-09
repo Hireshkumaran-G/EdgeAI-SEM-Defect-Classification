@@ -6,9 +6,9 @@ and hackathon submission guidelines.
 Dataset structure used in this project:
 ```text
 dataset/
-├── train/      (70%)
-├── val/        (15%)
-└── test/       (15%)
+├── train/      (150)
+├── val/        (32)
+└── test/       (33)
 ```
 Each split contains class-wise subfolders for all defect categories:
 - clean
