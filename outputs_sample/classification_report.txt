@@ -1,16 +1,16 @@
-              precision    recall  f1-score   support
+                 precision    recall  f1-score   support
 
-      bridge     0.9677    0.9091    0.9375        33
-       clean     0.8684    1.0000    0.9296        33
-         cmp     0.9677    0.9091    0.9375        33
-       crack     1.0000    1.0000    1.0000        33
-         ler     1.0000    1.0000    1.0000        33
-        open     0.9697    0.9697    0.9697        33
-       other     0.9412    0.9697    0.9552        33
-    particle     1.0000    0.9697    0.9846        33
-     scratch     0.9697    0.9697    0.9697        33
-        vias     1.0000    0.9697    0.9846        33
+          clean     0.9412    0.9697    0.9552        33
+  defect bridge     0.9412    0.9697    0.9552        33
+     defect cmp     1.0000    0.8788    0.9355        33
+   defect crack     1.0000    1.0000    1.0000        33
+     defect ler     0.9697    0.9697    0.9697        33
+    defect open     0.9429    1.0000    0.9706        33
+defect particle     1.0000    0.9394    0.9688        33
+ defect scratch     0.9412    0.9697    0.9552        33
+    defect vias     1.0000    0.9697    0.9846        33
+          other     0.9143    0.9697    0.9412        33
 
-    accuracy                         0.9667       330
-   macro avg     0.9684    0.9667    0.9668       330
-weighted avg     0.9684    0.9667    0.9668       330
+       accuracy                         0.9636       330
+      macro avg     0.9650    0.9636    0.9636       330
+   weighted avg     0.9650    0.9636    0.9636       330
