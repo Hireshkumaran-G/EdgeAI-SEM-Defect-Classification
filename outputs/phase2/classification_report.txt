@@ -1,0 +1,15 @@
+              precision    recall  f1-score   support
+
+      bridge       0.52      0.44      0.47        32
+       clean       0.29      0.61      0.39        33
+         cmp       0.32      0.40      0.36        30
+       crack       0.88      0.45      0.60        31
+         ler       0.43      0.30      0.35        30
+        open       0.29      0.17      0.21        30
+       other       0.28      0.52      0.36        50
+    particle       0.56      0.30      0.39        30
+         via       0.00      0.00      0.00        30
+
+    accuracy                           0.37       296
+   macro avg       0.40      0.35      0.35       296
+weighted avg       0.39      0.37      0.35       296

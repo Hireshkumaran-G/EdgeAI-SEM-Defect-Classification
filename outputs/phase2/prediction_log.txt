@@ -1,0 +1,8 @@
+Phase 2 Evaluation Log
+Date: 2026-02-14 21:11:53.189561
+Model Used: mobilenetv3_sem.onnx (Phase-1 submitted model)
+Image Size: 128x128
+No retraining performed as per rules.
+Accuracy: 0.3682
+Precision: 0.3904
+Recall: 0.3682
