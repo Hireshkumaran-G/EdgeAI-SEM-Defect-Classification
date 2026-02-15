@@ -1,6 +1,7 @@
 import os
 import cv2
 import json
+import sys
 import numpy as np
 import onnxruntime as ort
 import matplotlib.pyplot as plt
@@ -12,14 +13,39 @@ from datetime import datetime
 SRC_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(SRC_DIR)
 
-MODEL_PATH = os.path.join(PROJECT_ROOT, "models", "mobilenetv3_sem_int8.onnx")  # Phase-1 submitted model
+MODEL_PATH = os.path.join(PROJECT_ROOT, "models", "mobilenetv3_sem.onnx")
 DATASET_PATH = os.path.join(PROJECT_ROOT, "hackathon_test_dataset")
 CLASS_MAP_PATH = os.path.join(PROJECT_ROOT, "src", "class_map.json")
-OUTPUT_DIR = os.path.join(PROJECT_ROOT, "outputs")
+OUTPUT_DIR = os.path.join(PROJECT_ROOT, "outputs", "phase2")
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 IMG_SIZE = 128
+
+# ================= LOG FILE SETUP =================
+log_path = os.path.join(OUTPUT_DIR, "prediction_log.txt")
+log_file = open(log_path, "w")
+
+class Logger:
+    def __init__(self, *files):
+        self.files = files
+    def write(self, obj):
+        for f in self.files:
+            f.write(obj)
+            f.flush()
+    def flush(self):
+        for f in self.files:
+            f.flush()
+
+sys.stdout = Logger(sys.stdout, log_file)
+sys.stderr = Logger(sys.stderr, log_file)
+
+print("========== PHASE 2 EVALUATION START ==========")
+print("Date:", datetime.now())
+print("Model Path:", MODEL_PATH)
+print("Dataset Path:", DATASET_PATH)
+print("Image Size:", IMG_SIZE)
+print("No retraining performed as per rules.\n")
 
 # ================= LOAD CLASS MAP =================
 with open(CLASS_MAP_PATH, "r") as f:
@@ -38,9 +64,9 @@ print("Input Shape:", session.get_inputs()[0].shape)
 def preprocess(img_path):
     img = cv2.imread(img_path)
     if img is None:
+        print("Warning: Could not read", img_path)
         return None
 
-    # Match Phase-1 preprocessing
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     img = cv2.resize(img, (IMG_SIZE, IMG_SIZE))
     img = np.stack([img, img, img], axis=-1)
@@ -78,7 +104,6 @@ for folder in os.listdir(DATASET_PATH):
         pred_idx = int(np.argmax(logits))
         pred_class = idx_to_class[pred_idx]
 
-        # If predicted class not in test dataset → classify as 'other'
         if pred_class not in TEST_CLASSES:
             pred_class = "other"
 
@@ -92,27 +117,31 @@ recall = recall_score(y_true, y_pred, average='weighted', zero_division=0)
 cm = confusion_matrix(y_true, y_pred, labels=TEST_CLASSES)
 report = classification_report(y_true, y_pred, zero_division=0)
 
+print("\n========== RESULTS ==========")
+print("Accuracy:", round(accuracy, 4))
+print("Precision:", round(precision, 4))
+print("Recall:", round(recall, 4))
+
+print("\nConfusion Matrix:")
+print("Labels:", TEST_CLASSES)
+print(cm)
+
+print("\nClassification Report:\n")
+print(report)
+
 # ================= SAVE RESULTS =================
 
-# Accuracy / Precision / Recall
+# Save metrics
 with open(os.path.join(OUTPUT_DIR, "metrics.txt"), "w") as f:
     f.write(f"Accuracy: {accuracy:.4f}\n")
     f.write(f"Precision (weighted): {precision:.4f}\n")
     f.write(f"Recall (weighted): {recall:.4f}\n")
 
-# Classification report
+# Save classification report
 with open(os.path.join(OUTPUT_DIR, "classification_report.txt"), "w") as f:
     f.write(report)
 
-# Confusion matrix CSV
-np.savetxt(
-    os.path.join(OUTPUT_DIR, "confusion_matrix.csv"),
-    cm,
-    delimiter=",",
-    fmt="%d"
-)
-
-# Confusion matrix PNG
+# Save Confusion Matrix Image
 plt.figure(figsize=(10, 8))
 sns.heatmap(
     cm,
@@ -129,20 +158,4 @@ plt.tight_layout()
 plt.savefig(os.path.join(OUTPUT_DIR, "confusion_matrix.png"))
 plt.close()
 
-# Log file
-with open(os.path.join(OUTPUT_DIR, "prediction_log.txt"), "w") as f:
-    f.write("Phase 2 Evaluation Log\n")
-    f.write("Date: " + str(datetime.now()) + "\n")
-    f.write("Model Used: mobilenetv3_sem.onnx (Phase-1 submitted model)\n")
-    f.write("Image Size: 128x128\n")
-    f.write("No retraining performed as per rules.\n")
-    f.write(f"Accuracy: {accuracy:.4f}\n")
-    f.write(f"Precision: {precision:.4f}\n")
-    f.write(f"Recall: {recall:.4f}\n")
-
-print("\n========== PHASE 2 EVALUATION COMPLETE ==========")
-print("Accuracy:", round(accuracy, 4))
-print("Precision:", round(precision, 4))
-print("Recall:", round(recall, 4))
-print("All outputs saved in:", OUTPUT_DIR)
-print("=================================================")
+print("========== PHASE 2 EVALUATION COMPLETE ==========")
