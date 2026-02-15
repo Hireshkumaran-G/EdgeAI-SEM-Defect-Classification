@@ -1,8 +1,47 @@
-Phase 2 Evaluation Log
-Date: 2026-02-14 21:11:53.189561
-Model Used: mobilenetv3_sem.onnx (Phase-1 submitted model)
-Image Size: 128x128
+========== PHASE 2 EVALUATION START ==========
+Date: 2026-02-15 19:16:18.150533
+Model Path: d:\SEM_Detect\models\mobilenetv3_sem.onnx
+Dataset Path: d:\SEM_Detect\hackathon_test_dataset
+Image Size: 128
 No retraining performed as per rules.
+
+Model Loaded Successfully
+Input Shape: ['batch', 3, 128, 128]
+Detected Test Classes: ['bridge', 'clean', 'cmp', 'crack', 'ler', 'open', 'other', 'particle', 'via']
+
+========== RESULTS ==========
 Accuracy: 0.3682
 Precision: 0.3904
 Recall: 0.3682
+
+Confusion Matrix:
+Labels: ['bridge', 'clean', 'cmp', 'crack', 'ler', 'open', 'other', 'particle', 'via']
+[[14  6  2  0  2  2  5  1  0]
+ [ 0 20  4  0  1  1  6  1  0]
+ [ 2  3 12  1  1  0 10  1  0]
+ [ 0  4  0 14  0  1 12  0  0]
+ [ 5  9  4  0  9  1  1  1  0]
+ [ 2 10  3  0  3  5  6  1  0]
+ [ 3  6  7  1  3  3 26  1  0]
+ [ 1  2  2  0  2  4 10  9  0]
+ [ 0  9  3  0  0  0 17  1  0]]
+
+Classification Report:
+
+              precision    recall  f1-score   support
+
+      bridge       0.52      0.44      0.47        32
+       clean       0.29      0.61      0.39        33
+         cmp       0.32      0.40      0.36        30
+       crack       0.88      0.45      0.60        31
+         ler       0.43      0.30      0.35        30
+        open       0.29      0.17      0.21        30
+       other       0.28      0.52      0.36        50
+    particle       0.56      0.30      0.39        30
+         via       0.00      0.00      0.00        30
+
+    accuracy                           0.37       296
+   macro avg       0.40      0.35      0.35       296
+weighted avg       0.39      0.37      0.35       296
+
+========== PHASE 2 EVALUATION COMPLETE ==========
