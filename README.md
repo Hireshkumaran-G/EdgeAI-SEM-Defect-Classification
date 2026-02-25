@@ -135,19 +135,115 @@ As per competition rules:
 
 ---
 
+## Phase 3 – Final Hackathon Evaluation
+
+### Phase 3 Evaluation Dataset
+
+For Phase 3, the organizers provided a new dataset:
+- Training/validation set: ~1000 images across 11 defect classes
+- Test set: 331 images
+
+The dataset structure is described in `dataset_info/README.md`.  
+Data augmentation was performed using `src/augment_dataset.py` to improve model robustness.
+
+### Phase 3 Workflow & Scripts
+
+The typical workflow for Phase 3 is as follows:
+
+1. **Data Augmentation**
+   ```bash
+   python src/augment_dataset.py
+   ```
+   - Augments the dataset to increase diversity.
+
+2. **Initial Model Training**
+   ```bash
+   python src/train_mcu.py
+   ```
+   - Trains the base model for MCU/edge deployment.
+
+3. **Fine-tuning**
+   ```bash
+   python src/finetune_phase3.py
+   ```
+   - Fine-tunes the model on the Phase 3 dataset for improved accuracy.
+
+4. **Quantization & Evaluation**
+   ```bash
+   python src/quantize_and_eval.py
+   ```
+   - Quantizes the model (e.g., to TFLite/ONNX) and evaluates performance.
+
+5. **Final Evaluation**
+   ```bash
+   python src/evaluate_submission.py
+   ```
+   - Evaluates the quantized model on the test set and generates metrics.
+
+6. **Hackathon Submission Prediction**
+   ```bash
+   python src/hackathon_phase3_prediction_code.py
+   ```
+   - Runs the final prediction code for hackathon submission.
+
+### Phase 3 Model Performance
+
+| Model                      | Accuracy | Precision (macro) | Recall (macro) | F1 Score (macro) | Size      |
+|----------------------------|----------|-------------------|---------------|------------------|-----------|
+| Float32 (baseline, H5)     | 84.36%   | 85.11%            | 84.36%        | 84.40%           | 7.46 MB   |
+| Dynamic TFLite ★ PRIMARY   | 80.64%   | 81.75%            | 80.64%        | 80.61%           | 725.6 KB  |
+
+*Confusion matrix, classification report, and logs are available in `outputs/phase3/`.*
+
+#### Per-Class Metrics (Float32, macro avg)
+
+- Precision: 85.11%
+- Recall: 84.36%
+- F1 Score: 84.40%
+
+#### Per-Class Metrics (Dynamic TFLite, macro avg)
+
+- Precision: 81.75%
+- Recall: 80.64%
+- F1 Score: 80.61%
+
+#### Model Sizes
+
+- Float32 H5 checkpoint: 7.46 MB
+- Float32 SavedModel: 9.87 MB
+- Dynamic TFLite (PRIMARY): 725.6 KB
+- Size reduction (SavedModel → Dynamic TFLite): 92.8%
+
+### Observations
+
+- The Phase 3 dataset included 11 classes and had class imbalance.
+- Data augmentation and model selection were critical for achieving robust performance.
+- The final model demonstrates improved generalization to the expanded defect classes.
+- Significant model size reduction was achieved with TFLite quantization, with minimal loss in accuracy.
+
+---
+
 ## Deployment Compatibility
 
-- Export format: ONNX
-- Optimization: INT8 quantization available
-- Target platform: NXP Edge platforms (deployment via NXP eIQ toolkit)
-- Runtime: ONNX Runtime (CPU)
+- Export formats: TensorFlow SavedModel (.h5 → .pb), and TFLite (Dynamic Range Quantized)
+- Optimization: Dynamic Range Quantization (TFLite)
+- Target platforms: NXP Edge platforms (via NXP eIQ toolkit), MCUs, and other TFLite-compatible edge devices
+- Runtimes: TensorFlow Lite (CPU/MCU)
 
-## Hardware & Platform
+## Hardware & Platform - Phase 1
 
 | Stage | Framework | Hardware |
 |-------|-----------|----------|
 | Training | PyTorch | GPU (RTX 3050, 4GB VRAM) |
 | Inference | ONNX Runtime | CPU / Edge device |
+
+## Hardware & Platform - Phase 3
+| Stage | Framework | Hardware |
+|-------|-----------|----------|
+| Training | TensorFlow / Keras (.h5) | CPU |
+| Model Conversion | TensorFlow (.h5 → .pb → .tflite) | CPU |
+| Quantization | TensorFlow Lite Converter (Dynamic Range INT8) | CPU |
+| Inference | TensorFlow Lite Runtime (.tflite) | CPU / Edge Device|
 
 ## Disclaimer
 
