@@ -36,3 +36,26 @@ Important notes:
 - No retraining was performed (as per rules).
 - Mismatched classes were naturally classified under "other".
 - The full Phase 2 dataset is not included in this repository.
+
+---
+
+## Phase 3 Evaluation Dataset (Hackathon Provided)
+
+For Phase 3, the organizers provided a new dataset:
+
+- Training/validation set: ~1000 images across 11 defect classes
+- Test set: 331 images
+
+Dataset structure for Phase 3:
+```text
+phase3_dataset/
+├── train/      (11 classes, ~1000 images total)
+├── val/        (if provided, split from train)
+└── test/       (331 images)
+```
+Each split contains subfolders for each of the 11 defect categories.
+
+**Notes:**
+- The Phase 3 dataset expands the number of defect classes to 11.
+- The dataset was provided separately by the organizers for evaluation purposes.
+- The Phase 3 dataset was highly imbalanced, so targeted data augmentation was performed using `src/augment_dataset.py` to balance the classes (see script in the `src` folder for details).
