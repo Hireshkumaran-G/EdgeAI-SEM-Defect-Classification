@@ -47,22 +47,22 @@ Each split contains class-wise subfolders representing the defect categories.
 
 1. **Train the model**
 ```bash
-   python src/train_mobilenetv3_sem.py
+   python phase3_results/code/train_mobilenetv3_sem.py
 ```
 
 2. **Evaluate model on test set**
 ```bash
-   python src/evaluate_test_sem_and_save.py
+   python phase3_results/code/evaluate_test_sem_and_save.py
 ```
 
 3. **Export model to ONNX format**
 ```bash
-   python src/export_to_onnx_sem.py
+   python phase3_results/code/export_to_onnx_sem.py
 ```
 
 4. **Perform INT8 quantization (Edge optimization)**
 ```bash
-   python src/quantize_onnx_int8_sem.py
+   python phase3_results/code/quantize_onnx_int8_sem.py
 ```
 
 ### Phase 1 Model Performance
@@ -73,7 +73,7 @@ Each split contains class-wise subfolders representing the defect categories.
 | Test Accuracy | 96.37% | Hardware-dependent (NXP eIQ) |
 
 - Balanced performance across all defect categories.
-- Confusion matrix and output samples are available in `outputs/`.
+- Confusion matrix and output samples are available in `phase3_results/logs/`.
 
 ### Inference Demo
 
@@ -144,7 +144,7 @@ For Phase 3, the organizers provided a new dataset:
 - Test set: 331 images
 
 The dataset structure is described in `dataset_info/README.md`.  
-Data augmentation was performed using `src/augment_dataset.py` to improve model robustness.
+Data augmentation was performed using `phase3_results/code/augment_dataset.py` to improve model robustness.
 
 ### Phase 3 Workflow & Scripts
 
@@ -152,37 +152,37 @@ The typical workflow for Phase 3 is as follows:
 
 1. **Data Augmentation**
    ```bash
-   python src/augment_dataset.py
+   python phase3_results/code/augment_dataset.py
    ```
    - Augments the dataset to increase diversity.
 
 2. **Initial Model Training**
    ```bash
-   python src/train_mcu.py
+   python phase3_results/code/train_mcu.py
    ```
    - Trains the base model for MCU/edge deployment.
 
 3. **Fine-tuning**
    ```bash
-   python src/finetune_phase3.py
+   python phase3_results/code/finetune_phase3.py
    ```
    - Fine-tunes the model on the Phase 3 dataset for improved accuracy.
 
 4. **Quantization & Evaluation**
    ```bash
-   python src/quantize_and_eval.py
+   python phase3_results/code/quantize_and_eval.py
    ```
    - Quantizes the model (e.g., to TFLite/ONNX) and evaluates performance.
 
 5. **Final Evaluation**
    ```bash
-   python src/evaluate_submission.py
+   python phase3_results/code/evaluate_submission.py
    ```
    - Evaluates the quantized model on the test set and generates metrics.
 
 6. **Hackathon Submission Prediction**
    ```bash
-   python src/hackathon_phase3_prediction_code.py
+   python phase3_results/code/hackathon_phase3_prediction_code.py
    ```
    - Runs the final prediction code for hackathon submission.
 
@@ -193,7 +193,7 @@ The typical workflow for Phase 3 is as follows:
 | Float32 (baseline, H5)     | 84.36%   | 85.11%            | 84.36%        | 84.40%           | 7.46 MB   |
 | Dynamic TFLite ★ PRIMARY   | 80.64%   | 81.75%            | 80.64%        | 80.61%           | 725.6 KB  |
 
-*Confusion matrix, classification report, and logs are available in `outputs/phase3/`.*
+*Confusion matrix, classification report, and logs are available in `phase3_results/logs`.*
 
 #### Per-Class Metrics (Float32, macro avg)
 
