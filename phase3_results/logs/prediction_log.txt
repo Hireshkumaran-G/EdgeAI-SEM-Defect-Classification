@@ -1,0 +1,35 @@
+========== PHASE 3 EVALUATION START ==========
+Date: 2026-02-26 07:26:16.942804
+Model Path: D:\DeepTech\outputs\tflite\model_dynamic.tflite
+Dataset Path: D:\DeepTech\Hackathon_phase3_prediction_dataset
+Image Size: 128
+No retraining performed as per rules.
+
+Model Loaded Successfully
+Input Shape: [  1 128 128   3]
+Detected Test Classes: ['BRIDGE', 'CLEAN_CRACK', 'CLEAN_LAYER', 'CLEAN_VIA', 'CMP', 'CRACK', 'LER', 'OPEN', 'OTHERS', 'PARTICLE', 'VIA']
+
+Images : 331 found
+
+  Processed 100/331 ...
+  Processed 200/331 ...
+  Processed 300/331 ...
+
+Saved  : D:\DeepTech\outputs\predictions.txt  (331 rows)
+
+
+Preview (first 10):
+image_name                                    predicted_class
+------------------------------------------------------------
+  100.png                                     CRACK
+  101.png                                     CRACK
+  102.png                                     BRIDGE
+  103.png                                     OTHERS
+  104.png                                     CRACK
+  105.png                                     CMP
+  106.png                                     PARTICLE
+  107.png                                     CLEAN_CRACK
+  108.png                                     PARTICLE
+  109.png                                     CRACK
+
+========== PHASE 3 EVALUATION COMPLETE ==========
