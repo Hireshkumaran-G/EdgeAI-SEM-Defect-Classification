@@ -176,7 +176,7 @@ The typical workflow for Phase 3 is as follows:
 
 5. **Final Evaluation**
    ```bash
-   python phase3_results/code/evaluate_submission.py
+   python src/evaluate_submission.py
    ```
    - Evaluates the quantized model on the test set and generates metrics.
 
