@@ -144,7 +144,7 @@ For Phase 3, the organizers provided a new dataset:
 - Test set: 331 images
 
 The dataset structure is described in `dataset_info/README.md`.  
-Data augmentation was performed using `phase3_results/code/augment_dataset.py` to improve model robustness.
+Data augmentation was performed using `src/augment_dataset.py` to improve model robustness.
 
 ### Phase 3 Workflow & Scripts
 
@@ -152,25 +152,25 @@ The typical workflow for Phase 3 is as follows:
 
 1. **Data Augmentation**
    ```bash
-   python phase3_results/code/augment_dataset.py
+   python src/augment_dataset.py
    ```
    - Augments the dataset to increase diversity.
 
 2. **Initial Model Training**
    ```bash
-   python phase3_results/code/train_mcu.py
+   python src/train_mcu.py
    ```
    - Trains the base model for MCU/edge deployment.
 
 3. **Fine-tuning**
    ```bash
-   python phase3_results/code/finetune_phase3.py
+   python src/finetune_phase3.py
    ```
    - Fine-tunes the model on the Phase 3 dataset for improved accuracy.
 
 4. **Quantization & Evaluation**
    ```bash
-   python phase3_results/code/quantize_and_eval.py
+   python src/quantize_and_eval.py
    ```
    - Quantizes the model (e.g., to TFLite/ONNX) and evaluates performance.
 
@@ -182,7 +182,7 @@ The typical workflow for Phase 3 is as follows:
 
 6. **Hackathon Submission Prediction**
    ```bash
-   python phase3_results/code/hackathon_phase3_prediction_code.py
+   python src/hackathon_phase3_prediction_code.py
    ```
    - Runs the final prediction code for hackathon submission.
 
@@ -193,7 +193,7 @@ The typical workflow for Phase 3 is as follows:
 | Float32 (baseline, H5)     | 84.36%   | 85.11%            | 84.36%        | 84.40%           | 7.46 MB   |
 | Dynamic TFLite ★ PRIMARY   | 80.64%   | 81.75%            | 80.64%        | 80.61%           | 725.6 KB  |
 
-*Confusion matrix, classification report, and logs are available in `phase3_results/logs`.*
+*Confusion matrix, classification report, and logs are available in `outputs/phase3`.*
 
 #### Per-Class Metrics (Float32, macro avg)
 
